@@ -1,0 +1,14 @@
+# syntax=docker/dockerfile:1
+
+FROM node:17-alpine as builder
+
+WORKDIR /app
+COPY package.json ./
+COPY public ./
+COPY src ./
+COPY App.* ./
+RUN npm install
+
+COPY . ./
+RUN npm run build
+CMD ["npm", "start"]
